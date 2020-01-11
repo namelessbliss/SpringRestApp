@@ -4,6 +4,7 @@ import com.nb.spring.entity.Profesor;
 import com.nb.spring.service.IProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,5 +20,15 @@ public class ProfesorRestController {
     @ResponseStatus(HttpStatus.OK)
     public List<Profesor> getProfesores() {
         return profesorService.findAll();
+    }
+
+    @PostMapping("sign_up")
+    public ResponseEntity<Void> addProfesor(@RequestBody Profesor profesor) {
+        if (profesorService.findProfesor(profesor) == null){
+            profesorService.save(profesor);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        }else {
+            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        }
     }
 }

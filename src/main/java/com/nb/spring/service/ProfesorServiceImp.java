@@ -22,6 +22,12 @@ public class ProfesorServiceImp implements IProfesorService {
     }
 
     @Override
+    @Transactional
+    public void save(Profesor profesor) {
+        profesorDao.save(profesor);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Profesor findProfesor(Profesor profesor) {
         return (Profesor) profesorDao.findByEmail(profesor.getEmail());
