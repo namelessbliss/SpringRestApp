@@ -1,6 +1,14 @@
 package com.nb.spring.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,7 +25,7 @@ public class Profesor implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "email", length = 60, unique = true) //campo unico
+    @Column(length = 60, unique = true) //campo unico
     private String email;
 
     private String password;
@@ -32,6 +40,9 @@ public class Profesor implements Serializable {
     @PrePersist
     public void prePersist() {
         createAt = new Date();
+    }
+
+    public Profesor() {
     }
 
     public Long getId() {

@@ -22,12 +22,12 @@ public class ProfesorRestController {
         return profesorService.findAll();
     }
 
-    @PostMapping("sign_up")
+    @PostMapping("/sign_up")
     public ResponseEntity<Void> addProfesor(@RequestBody Profesor profesor) {
-        if (profesorService.findProfesor(profesor) == null){
+        if (profesorService.findProfesor(profesor) == null) {
             profesorService.save(profesor);
             return new ResponseEntity<Void>(HttpStatus.CREATED);
-        }else {
+        } else {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
     }
