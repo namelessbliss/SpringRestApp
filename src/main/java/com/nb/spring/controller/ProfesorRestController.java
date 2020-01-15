@@ -31,4 +31,18 @@ public class ProfesorRestController {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
     }
+
+    @PutMapping("/update/{id}") //se pasa parametro id
+    public ResponseEntity<?> updateProfesor(@PathVariable(value = "id") Long id, @RequestBody Profesor profesor) {
+        Profesor profesorFromDB = null;
+        profesorFromDB = profesorService.findById(id); //Encuentra por el id pasado como parametro
+        if (profesorFromDB != null) {
+            profesorFromDB.setEmail(profesor.getEmail());
+            profesorFromDB.setNombre(profesor.getNombre());
+            profesorService.updateProfesor(profesorFromDB);
+            return new ResponseEntity<>(profesorFromDB, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
