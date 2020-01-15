@@ -64,6 +64,12 @@ public class ProfesorServiceImp implements IProfesorService {
     }
 
     @Override
+    @Transactional
+    public void deleteAllProfesor() {
+        profesorDao.deleteAll();
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Profesor findById(Long id) {
         return profesorDao.findById(id).orElse(null);

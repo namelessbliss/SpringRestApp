@@ -57,4 +57,10 @@ public class ProfesorRestController {
             return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteAllProfesor() {
+        profesorService.deleteAllProfesor();
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 }
