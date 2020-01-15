@@ -45,4 +45,16 @@ public class ProfesorRestController {
             return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteProfesor(@PathVariable(value = "id") Long id) {
+        Profesor profesorFromDB = null;
+        profesorFromDB = profesorService.findById(id); //Encuentra por el id pasado como parametro
+        if (profesorFromDB != null) {
+            profesorService.deleteProfesor(id);
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
