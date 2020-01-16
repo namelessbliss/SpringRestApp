@@ -1,12 +1,15 @@
 package com.nb.spring.controller;
 
 import com.nb.spring.entity.Profesor;
+import com.nb.spring.mapper.Mapper;
+import com.nb.spring.model.MProfesor;
 import com.nb.spring.service.IProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -47,7 +50,11 @@ public class ProfesorRestController {
     public ResponseEntity<?> loginProfesor(@RequestBody Profesor profesor) {
         Profesor profesorFromDb = profesorService.checkProfesorLogin(profesor);
         if (profesorFromDb != null) {
-            return new ResponseEntity<>(profesorFromDb, HttpStatus.OK);
+            List<Profesor> profesores = new ArrayList<>();
+            profesores.add(profesorFromDb);
+            List<MProfesor> mProfesores = new ArrayList<>();
+            mProfesores = Mapper.convertirLista(profesores);
+            return new ResponseEntity<>(mProfesores, HttpStatus.OK);
         } else {
             return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
         }
