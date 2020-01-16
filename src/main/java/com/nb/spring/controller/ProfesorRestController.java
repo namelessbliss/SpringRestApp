@@ -43,6 +43,16 @@ public class ProfesorRestController {
         }
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> loginProfesor(@RequestBody Profesor profesor) {
+        Profesor profesorFromDb = profesorService.checkProfesorLogin(profesor);
+        if (profesorFromDb != null) {
+            return new ResponseEntity<>(profesorFromDb, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     /**
      * Actualiza profesor con query sql
      *

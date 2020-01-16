@@ -13,7 +13,7 @@ public interface IProfesorService {
 
     public Profesor findProfesor(Profesor profesor);
 
-    public Profesor checkProfesorLogin(String email, String password);
+    public Profesor checkProfesorLogin(Profesor profesor);
 
     public void deleteProfesor(Profesor profesor);
 

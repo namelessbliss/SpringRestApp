@@ -35,8 +35,8 @@ public class ProfesorServiceImp implements IProfesorService {
 
     @Override
     @Transactional(readOnly = true)
-    public Profesor checkProfesorLogin(String email, String password) {
-        return (Profesor) profesorDao.findByEmailAndPassword(email, password);
+    public Profesor checkProfesorLogin(Profesor profesor) {
+        return (Profesor) profesorDao.findByEmailAndPassword(profesor.getEmail(), profesor.getPassword());
     }
 
     @Override
