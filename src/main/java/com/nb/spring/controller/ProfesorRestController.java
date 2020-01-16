@@ -22,6 +22,17 @@ public class ProfesorRestController {
         return profesorService.findAll();
     }
 
+
+    @PostMapping("/find_profesor")
+    public ResponseEntity<?> findProfesor(@RequestBody Profesor profesor) {
+        Profesor profesorFromDb = profesorService.findProfesor(profesor);
+        if (profesorFromDb != null) {
+            return new ResponseEntity<>(profesorFromDb, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping("/sign_up")
     public ResponseEntity<Void> addProfesor(@RequestBody Profesor profesor) {
         if (profesorService.findProfesor(profesor) == null) {
@@ -29,6 +40,26 @@ public class ProfesorRestController {
             return new ResponseEntity<Void>(HttpStatus.CREATED);
         } else {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        }
+    }
+
+    /**
+     * Actualiza profesor con query sql
+     *
+     * @param profesor
+     * @return
+     */
+    @PutMapping("/update_sql") //se pasa parametro id
+    public ResponseEntity<?> updateProfesorSQL(@RequestBody Profesor profesor) {
+        Profesor profesorFromDB = null;
+        profesorFromDB = profesorService.findByIdSQL(profesor.getId()); //Encuentra por el id pasado como parte del objeto profesor
+        if (profesorFromDB != null) {
+            profesorFromDB.setEmail(profesor.getEmail());
+            profesorFromDB.setNombre(profesor.getNombre());
+            profesorService.updateProfesor(profesorFromDB);
+            return new ResponseEntity<>(profesorFromDB, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
         }
     }
 
