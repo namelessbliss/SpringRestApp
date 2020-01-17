@@ -113,4 +113,8 @@ public class Profesor implements Serializable {
     public void setCurso(List<Curso> curso) {
         this.curso = curso;
     }
+
+    public void addLenguaje(Lenguaje lenguaje){
+        this.lenguajes.add(lenguaje);
+    }
 }
