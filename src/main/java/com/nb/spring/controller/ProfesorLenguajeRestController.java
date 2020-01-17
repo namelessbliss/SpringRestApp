@@ -46,6 +46,6 @@ public class ProfesorLenguajeRestController {
             profesorService.save(profesorFromDb);
             return new ResponseEntity<Void>(HttpStatus.CREATED);
         }
-        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND)
+        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
     }
 }
