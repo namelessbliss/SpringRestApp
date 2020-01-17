@@ -1,16 +1,10 @@
 package com.nb.spring.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "profesores")
@@ -36,6 +30,10 @@ public class Profesor implements Serializable {
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
+
+    @OneToMany(cascade = CascadeType.ALL) //Si se borra un profesor, se borraran sus cursos asociados
+    @JoinColumn(name = "profesor_id", referencedColumnName = "id")
+    private List<Curso> curso = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
@@ -91,5 +89,13 @@ public class Profesor implements Serializable {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public List<Curso> getCurso() {
+        return curso;
+    }
+
+    public void setCurso(List<Curso> curso) {
+        this.curso = curso;
     }
 }
