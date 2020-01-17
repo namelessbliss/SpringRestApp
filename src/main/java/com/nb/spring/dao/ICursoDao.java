@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ICursoDao extends CrudRepository<Curso, Long> {
 
-    public List<Curso> findProfesorByID(Long id);
+    public List<Curso> findByProfesorId(Long id);
 }

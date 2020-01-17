@@ -27,6 +27,6 @@ public class CursoServiceImpl implements ICursoService {
 
     @Override
     public List<Curso> getCursosProfesor(Long id) {
-        return (List<Curso>) cursoDao.findProfesorByID(id);
+        return (List<Curso>) cursoDao.findByProfesorId(id);
     }
 }

@@ -31,7 +31,7 @@ public class CursoRestController {
         }
     }
 
-    @PostMapping("/crearCurso")
+    @PostMapping("/crear_curso")
     public ResponseEntity<?> agregarCurso(@RequestBody Curso curso) {
         cursoService.saveCurso(curso);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
