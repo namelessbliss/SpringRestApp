@@ -21,8 +21,13 @@ public class Lenguaje implements Serializable {
     private String nombre;
 
     @Column(name = "date")
-    @JsonFormat(pattern = "YYYY-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date date;
+
+    @PrePersist
+    public void prePersist() {
+        date = new Date();
+    }
 
     @ManyToMany
     @JoinTable(name = "profesores_lenguajes",
